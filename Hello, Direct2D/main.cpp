@@ -5,7 +5,10 @@
 
 #include "main.h"
 
+#include "Main Window.h"
+
 using namespace D2DDemo::HelloDirect2D;
+using namespace D2DDemo::HelloDirect2D::Window;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR, _In_ int)
 {
@@ -14,5 +17,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 
 int D2DDemo::HelloDirect2D::Main::OnExecute()
 {
-	return 0;
+	auto window{ std::make_unique<MainWindow>() };
+	window->Create(hInstance, nullptr);
+	ShowWindow(window->GetHwnd(), SW_SHOW);
+	UpdateWindow(window->GetHwnd());
+	return window->MessageLoop();
 }
