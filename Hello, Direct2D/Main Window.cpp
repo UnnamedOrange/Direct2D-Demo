@@ -67,3 +67,8 @@ void D2DDemo::HelloDirect2D::Window::MainWindow::DrawRectangle()
 	pRenderTarget->DrawRectangle(D2D1::RectF(20, 20, width - 20, height - 20), brush);
 	brush->Release();
 }
+
+D2DDemo::HelloDirect2D::Window::MainWindow::MainWindow()
+{
+	property__lpWindowName__(L"Hello, Direct2D");
+}

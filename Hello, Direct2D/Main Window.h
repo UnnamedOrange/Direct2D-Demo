@@ -22,9 +22,6 @@ namespace D2DDemo::HelloDirect2D::Window
 		void DrawRectangle();
 
 	public:
-		MainWindow()
-		{
-
-		}
+		MainWindow();
 	};
 }
