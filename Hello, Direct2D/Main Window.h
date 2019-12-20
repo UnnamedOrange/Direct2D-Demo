@@ -7,11 +7,24 @@
 
 namespace D2DDemo::HelloDirect2D::Window
 {
-	class MainWindow : public TWindowNormal
+	class MainWindow : public TWindowNormal,
+		public TWinAug::TDPI,
+		public TWinAug::TWinSize
 	{
 		virtual LRESULT WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 
-	public:
+	private:
+		ID2D1HwndRenderTarget* pRenderTarget{};
+		void CreateD2DRenderTarget();
+		void ReleaseD2DRenderTarget();
 
+	private:
+		void DrawRectangle();
+
+	public:
+		MainWindow()
+		{
+
+		}
 	};
 }

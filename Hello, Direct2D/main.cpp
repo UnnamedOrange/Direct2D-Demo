@@ -17,9 +17,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE, _In_ LPWSTR,
 
 int D2DDemo::HelloDirect2D::Main::OnExecute()
 {
+	CreateD2DFactory();
+
 	auto window{ std::make_unique<MainWindow>() };
 	window->Create(hInstance, nullptr);
 	ShowWindow(window->GetHwnd(), SW_SHOW);
 	UpdateWindow(window->GetHwnd());
 	return window->MessageLoop();
+}
+
+void D2DDemo::HelloDirect2D::Main::CreateD2DFactory()
+{
+	if (FAILED(D2D1CreateFactory(
+		D2D1_FACTORY_TYPE::D2D1_FACTORY_TYPE_MULTI_THREADED, &pFactory)))
+		throw std::runtime_error("Fail to D2D1CreateFactory.");
+}
+D2DDemo::HelloDirect2D::Main::~Main()
+{
+	if (pFactory) pFactory->Release();
 }

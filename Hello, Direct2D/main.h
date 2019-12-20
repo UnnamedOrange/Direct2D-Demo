@@ -12,5 +12,10 @@ namespace D2DDemo::HelloDirect2D
 	public:
 		using TApplication<Main>::TApplication;
 		virtual int OnExecute() override;
+
+	public:
+		ID2D1Factory* pFactory{};
+		void CreateD2DFactory();
+		~Main();
 	};
 }
