@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hello, Direct2D", "Hello, Direct2D\Hello, Direct2D.vcxproj", "{C9237E43-2DC2-4636-B47A-E858D2F6F012}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Random Graphics", "Random Graphics\Random Graphics.vcxproj", "{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{C9237E43-2DC2-4636-B47A-E858D2F6F012}.Release|x64.Build.0 = Release|x64
 		{C9237E43-2DC2-4636-B47A-E858D2F6F012}.Release|x86.ActiveCfg = Release|Win32
 		{C9237E43-2DC2-4636-B47A-E858D2F6F012}.Release|x86.Build.0 = Release|Win32
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Debug|x64.ActiveCfg = Debug|x64
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Debug|x64.Build.0 = Debug|x64
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Debug|x86.ActiveCfg = Debug|Win32
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Debug|x86.Build.0 = Debug|Win32
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Release|x64.ActiveCfg = Release|x64
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Release|x64.Build.0 = Release|x64
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Release|x86.ActiveCfg = Release|Win32
+		{155EDA93-2E1A-4C28-95FA-DF8ECFD41238}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
