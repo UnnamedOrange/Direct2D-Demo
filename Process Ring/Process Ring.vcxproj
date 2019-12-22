@@ -169,6 +169,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CircleObject.h" />
     <ClInclude Include="Main Window.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="pch.h" />

@@ -5,6 +5,8 @@
 
 #include "pch.h"
 
+#include "CircleObject.h"
+
 namespace D2DDemo::ProcessRing::Window
 {
 	class MainWindow : public TWindowNormal,
@@ -22,6 +24,9 @@ namespace D2DDemo::ProcessRing::Window
 	private:
 		std::deque<INT64> dq;
 		bool is_focus{};
+
+		std::array<Layout::CircleObject, 5> circles;
+		void set_propertys();
 		void Paint();
 
 	public:

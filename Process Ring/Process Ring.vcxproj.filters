@@ -21,6 +21,9 @@
     <ClInclude Include="Main Window.h">
       <Filter>头文件\Window</Filter>
     </ClInclude>
+    <ClInclude Include="CircleObject.h">
+      <Filter>头文件\Layout</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="源文件">
@@ -37,6 +40,9 @@
     </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{0d4108a3-0e76-4166-8b67-9c015096f66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Layout">
+      <UniqueIdentifier>{28dd2f16-e9b6-424a-925f-28de8bae0fd5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

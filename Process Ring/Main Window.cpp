@@ -7,6 +7,8 @@
 
 #include "main.h"
 
+using namespace D2DDemo::ProcessRing::Layout;
+
 LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
@@ -14,6 +16,12 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 		HANDLE_MSG(hwnd, WM_CREATE, [this](HWND hwnd, LPCREATESTRUCT lpCreateStruct)->BOOL
 			{
 				CreateD2DRenderTarget();
+
+				set_propertys();
+				for (int i = 0; i < std::size(circles); i++)
+				{
+					circles[i].reset_start_time(i * circles[i].T / std::size(circles));
+				}
 				return TRUE;
 			});
 		HANDLE_MSG(hwnd, WM_DESTROY, [this](HWND hwnd)->void
@@ -23,6 +31,7 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 		HANDLE_MSG(hwnd, WM_SIZE, [this](HWND hwnd, UINT state, int cx, int cy)->void
 			{
 				pRenderTarget->Resize(D2D1::SizeU(cx, cy));
+				set_propertys();
 			});
 		HANDLE_MSG(hwnd, WM_SETFOCUS, [this](HWND hwnd, HWND hwndOldFocus)->void
 			{
@@ -83,10 +92,25 @@ void D2DDemo::ProcessRing::Window::MainWindow::ReleaseD2DRenderTarget()
 	}
 }
 
+void D2DDemo::ProcessRing::Window::MainWindow::set_propertys()
+{
+	for (auto& c : circles)
+	{
+		c.set_property(CircleObject::Property{
+			D2D1::Point2F(static_cast<FLOAT>(width) / 2, static_cast<FLOAT>(height) / 2), 
+			static_cast<FLOAT>(50.0f * dpi)});
+	}
+}
+
 void D2DDemo::ProcessRing::Window::MainWindow::Paint()
 {
 	pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
+	for (auto& c : circles)
+	{
+		c.update();
+		c.draw(pRenderTarget);
+	}
 }
 
 D2DDemo::ProcessRing::Window::MainWindow::MainWindow()
