@@ -5,8 +5,6 @@
 
 #include "pch.h"
 
-#include "Utils/PerformanceCounter.hpp"
-
 namespace D2DDemo::ProcessRing::Window
 {
 	class MainWindow : public TWindowNormal,
@@ -22,8 +20,8 @@ namespace D2DDemo::ProcessRing::Window
 		void ReleaseD2DRenderTarget();
 
 	private:
-		Utils::PerforamnceCounter time;
 		std::deque<INT64> dq;
+		bool is_focus{};
 		void Paint();
 
 	public:

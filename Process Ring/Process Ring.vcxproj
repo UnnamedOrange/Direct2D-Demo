@@ -169,7 +169,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Utils\PerformanceCounter.hpp" />
     <ClInclude Include="Main Window.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="pch.h" />

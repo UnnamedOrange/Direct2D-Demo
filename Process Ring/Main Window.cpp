@@ -7,6 +7,8 @@
 
 #include "main.h"
 
+#include <chrono>
+
 LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
@@ -24,6 +26,14 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 			{
 				pRenderTarget->Resize(D2D1::SizeU(cx, cy));
 			});
+		HANDLE_MSG(hwnd, WM_SETFOCUS, [this](HWND hwnd, HWND hwndOldFocus)->void
+			{
+				is_focus = true;
+			});
+		HANDLE_MSG(hwnd, WM_KILLFOCUS, [this](HWND hwnd, HWND hwndNewFocus)->void
+			{
+				is_focus = false;
+			});
 
 		HANDLE_MSG(hwnd, WM_PAINT, OnPaint);
 
@@ -34,15 +44,34 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 }
 void D2DDemo::ProcessRing::Window::MainWindow::OnPaint(HWND hwnd)
 {
+	using clock = std::chrono::high_resolution_clock;
+	dq.push_back(clock::now().time_since_epoch().count());
+	if (dq.size() > 15)
+		dq.pop_front();
+	std::wstring str_fps;
+	if (dq.size() > 1)
+	{
+		int fps = (long double)(dq.size() - 1) * clock::period::den / (dq.back() - dq.front()) + 0.5;
+		str_fps = std::to_wstring(fps);
+	}
+	if (!is_focus)
+		std::this_thread::sleep_for(std::chrono::duration<long long, std::ratio<1, 16>>(1));
+
 	pRenderTarget->BeginDraw();
 	Paint();
 	pRenderTarget->EndDraw();
+
+	HDC hdc = GetDC(GetHwnd());
+	TextOutW(hdc, 0, 0, str_fps.c_str(), str_fps.length());
+	ReleaseDC(GetHwnd(), hdc);
+
 	ValidateRect(hwnd, NULL); // note
 }
 
 void D2DDemo::ProcessRing::Window::MainWindow::CreateD2DRenderTarget()
 {
-	if (FAILED(Main::App().pFactory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(),
+	if (FAILED(Main::App().pFactory->CreateHwndRenderTarget(
+		D2D1::RenderTargetProperties(D2D1_RENDER_TARGET_TYPE_DEFAULT, D2D1::PixelFormat(), USER_DEFAULT_SCREEN_DPI, USER_DEFAULT_SCREEN_DPI),
 		D2D1::HwndRenderTargetProperties(GetHwnd(), D2D1::SizeU(1920, 1080)),
 		&pRenderTarget)))
 		throw std::runtime_error("Fail to CreateHwndRenderTarget.");
@@ -59,21 +88,8 @@ void D2DDemo::ProcessRing::Window::MainWindow::ReleaseD2DRenderTarget()
 
 void D2DDemo::ProcessRing::Window::MainWindow::Paint()
 {
-	dq.push_back(time());
-	if (dq.size() > 288)
-		dq.pop_front();
-	if (dq.size() > 1)
-	{
-		int fps = (long double)dq.size() * time.rate / (dq.back() - dq.front()) + 0.5;
-		OutputDebugStringW((std::to_wstring(fps) + L"\n").c_str());
-	}
+	pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::White));
 
-	{
-		ID2D1SolidColorBrush* brush;
-		pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::White), &brush);
-		pRenderTarget->FillRectangle(D2D1::RectF(0, 0, width, height), brush);
-		brush->Release();
-	}
 }
 
 D2DDemo::ProcessRing::Window::MainWindow::MainWindow()
