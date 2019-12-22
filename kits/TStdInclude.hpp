@@ -37,6 +37,7 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <thread>
+#include <chrono>
 #if _HAS_CXX17
 #include <optional>
 #include <filesystem>

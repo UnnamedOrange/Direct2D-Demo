@@ -7,8 +7,6 @@
 
 #include "main.h"
 
-#include <chrono>
-
 LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
@@ -75,7 +73,6 @@ void D2DDemo::ProcessRing::Window::MainWindow::CreateD2DRenderTarget()
 		D2D1::HwndRenderTargetProperties(GetHwnd(), D2D1::SizeU(1920, 1080)),
 		&pRenderTarget)))
 		throw std::runtime_error("Fail to CreateHwndRenderTarget.");
-	pRenderTarget->SetDpi(USER_DEFAULT_SCREEN_DPI, USER_DEFAULT_SCREEN_DPI);
 }
 void D2DDemo::ProcessRing::Window::MainWindow::ReleaseD2DRenderTarget()
 {
