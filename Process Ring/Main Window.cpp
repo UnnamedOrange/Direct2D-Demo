@@ -79,7 +79,7 @@ void D2DDemo::ProcessRing::Window::MainWindow::CreateD2DRenderTarget()
 {
 	if (FAILED(Main::App().pFactory->CreateHwndRenderTarget(
 		D2D1::RenderTargetProperties(D2D1_RENDER_TARGET_TYPE_DEFAULT, D2D1::PixelFormat(), USER_DEFAULT_SCREEN_DPI, USER_DEFAULT_SCREEN_DPI),
-		D2D1::HwndRenderTargetProperties(GetHwnd(), D2D1::SizeU(1920, 1080)),
+		D2D1::HwndRenderTargetProperties(GetHwnd()),
 		&pRenderTarget)))
 		throw std::runtime_error("Fail to CreateHwndRenderTarget.");
 }

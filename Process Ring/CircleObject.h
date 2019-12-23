@@ -53,12 +53,13 @@ namespace D2DDemo::ProcessRing::Layout
 		{
 			auto crt_t = t;
 			crt_t = (crt_t % T + T) % T;
-			double pi{ std::acos(-1.0) };
-			// TODO: 完善解析式
+
+			constexpr FLOAT pi{ 3.14159265358979323846264f };
 			FLOAT x = 2 * pi * crt_t.count() / T.count();
-			FLOAT move = -std::sin(x) + x;
-			move = pi / 2 - move;
 			FLOAT s, c;
+			D2D1SinCos(x, &s, &c);
+			FLOAT move = -s + x;
+			move = pi / 2 - move;
 			D2D1SinCos(move, &s, &c);
 
 			D2D1_POINT_2F center{ prop.center.x + prop.radius * c, prop.center.y - prop.radius * s };
