@@ -33,6 +33,7 @@ namespace D2DDemo::ProcessRing::Layout
 		{
 			auto now = clock::now();
 			t += now - start_time;
+			start_time = now;
 			update_layout();
 		}
 		void update_layout()
@@ -41,7 +42,7 @@ namespace D2DDemo::ProcessRing::Layout
 		}
 
 	public:
-		static constexpr clock::duration T{ std::chrono::duration_cast<clock::duration>(std::chrono::seconds(1)) };
+		static constexpr clock::duration T{ std::chrono::duration_cast<clock::duration>(std::chrono::milliseconds(1500)) };
 		void update()
 		{
 			next_timeline();
@@ -54,7 +55,8 @@ namespace D2DDemo::ProcessRing::Layout
 			crt_t = (crt_t % T + T) % T;
 			double pi{ std::acos(-1.0) };
 			// TODO: 完善解析式
-			FLOAT move = 2 * pi * ((1 / (2 * pi)) * sin(2 * pi / T.count() * crt_t.count() - pi) + (FLOAT)crt_t.count() / T.count());
+			FLOAT x = 2 * pi * crt_t.count() / T.count();
+			FLOAT move = -std::sin(x) + x;
 			move = pi / 2 - move;
 			FLOAT s, c;
 			D2D1SinCos(move, &s, &c);

@@ -20,7 +20,7 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 				set_propertys();
 				for (int i = 0; i < std::size(circles); i++)
 				{
-					circles[i].reset_start_time(i * circles[i].T / std::size(circles));
+					circles[i].reset_start_time(i * circles[i].T / (std::size(circles) + 8));
 				}
 				return TRUE;
 			});
@@ -97,8 +97,8 @@ void D2DDemo::ProcessRing::Window::MainWindow::set_propertys()
 	for (auto& c : circles)
 	{
 		c.set_property(CircleObject::Property{
-			D2D1::Point2F(static_cast<FLOAT>(width) / 2, static_cast<FLOAT>(height) / 2), 
-			static_cast<FLOAT>(50.0f * dpi)});
+			D2D1::Point2F(static_cast<FLOAT>(width) / 2, static_cast<FLOAT>(height) / 2),
+			static_cast<FLOAT>(50.0f * dpi) });
 	}
 }
 
