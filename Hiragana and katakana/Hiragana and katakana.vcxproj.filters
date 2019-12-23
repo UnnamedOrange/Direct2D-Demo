@@ -19,6 +19,12 @@
     <Filter Include="源文件\Window">
       <UniqueIdentifier>{55b1f4a4-05ff-49d1-9a36-af337b9a3816}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Sekai">
+      <UniqueIdentifier>{4714654a-912d-4fde-b18e-48468b4c2ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Widget">
+      <UniqueIdentifier>{8ce885aa-325f-4d73-90f3-14197ff67fa5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -40,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="Main Window.h">
       <Filter>头文件\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Sekai\DWidget.h">
+      <Filter>头文件\Sekai</Filter>
+    </ClInclude>
+    <ClInclude Include="Sekai\Sekai.h">
+      <Filter>头文件\Sekai</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
