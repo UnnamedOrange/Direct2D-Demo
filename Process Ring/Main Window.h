@@ -26,7 +26,7 @@ namespace D2DDemo::ProcessRing::Window
 		bool is_focus{};
 
 		std::array<Layout::CircleObject, 5> circles;
-		void set_propertys();
+		void set_properties();
 		void Paint();
 
 	public:

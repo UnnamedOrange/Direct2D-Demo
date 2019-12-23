@@ -17,7 +17,7 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 			{
 				CreateD2DRenderTarget();
 
-				set_propertys();
+				set_properties();
 				for (int i = 0; i < std::size(circles); i++)
 				{
 					circles[i].reset_start_time(i * circles[i].T / (std::size(circles) + 8));
@@ -31,7 +31,7 @@ LRESULT D2DDemo::ProcessRing::Window::MainWindow::WndProc(HWND hwnd, UINT messag
 		HANDLE_MSG(hwnd, WM_SIZE, [this](HWND hwnd, UINT state, int cx, int cy)->void
 			{
 				pRenderTarget->Resize(D2D1::SizeU(cx, cy));
-				set_propertys();
+				set_properties();
 			});
 		HANDLE_MSG(hwnd, WM_SETFOCUS, [this](HWND hwnd, HWND hwndOldFocus)->void
 			{
@@ -92,7 +92,7 @@ void D2DDemo::ProcessRing::Window::MainWindow::ReleaseD2DRenderTarget()
 	}
 }
 
-void D2DDemo::ProcessRing::Window::MainWindow::set_propertys()
+void D2DDemo::ProcessRing::Window::MainWindow::set_properties()
 {
 	for (auto& c : circles)
 	{
