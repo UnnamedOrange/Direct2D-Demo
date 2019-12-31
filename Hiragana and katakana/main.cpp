@@ -23,7 +23,7 @@ int D2DDemo::HiraganaAndKatakana::Main::OnExecute()
 	window->Create(hInstance, nullptr);
 	ShowWindow(window->GetHwnd(), SW_SHOW);
 	UpdateWindow(window->GetHwnd());
-	return window->PeekMessageLoop();
+	return window->MessageLoop();
 }
 
 void D2DDemo::HiraganaAndKatakana::Main::CreateD2DFactory()

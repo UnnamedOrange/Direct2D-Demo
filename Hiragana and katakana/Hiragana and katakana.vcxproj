@@ -169,11 +169,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="draw.h" />
     <ClInclude Include="Main Window.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="root.hpp" />
-    <ClInclude Include="widget.hpp" />
+    <ClInclude Include="rectangle.h" />
+    <ClInclude Include="root.h" />
+    <ClInclude Include="widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

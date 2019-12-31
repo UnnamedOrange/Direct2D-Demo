@@ -47,10 +47,16 @@
     <ClInclude Include="Main Window.h">
       <Filter>头文件\Window</Filter>
     </ClInclude>
-    <ClInclude Include="widget.hpp">
+    <ClInclude Include="root.h">
       <Filter>头文件\UI\Widget</Filter>
     </ClInclude>
-    <ClInclude Include="root.hpp">
+    <ClInclude Include="widget.h">
+      <Filter>头文件\UI\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="draw.h">
+      <Filter>头文件\UI\Widget</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle.h">
       <Filter>头文件\UI\Widget</Filter>
     </ClInclude>
   </ItemGroup>

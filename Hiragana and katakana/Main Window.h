@@ -5,6 +5,9 @@
 
 #include "pch.h"
 
+#include "widget.h"
+#include "root.h"
+
 namespace D2DDemo::HiraganaAndKatakana::Window
 {
 	class MainWindow : public TWindowNormal,
@@ -15,6 +18,7 @@ namespace D2DDemo::HiraganaAndKatakana::Window
 		void OnPaint(HWND hwnd);
 
 	private:
+		UI::Widget::root ui;
 		ID2D1HwndRenderTarget* pRenderTarget{};
 		void CreateD2DRenderTarget();
 		void ReleaseD2DRenderTarget();
