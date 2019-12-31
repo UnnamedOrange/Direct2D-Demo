@@ -169,6 +169,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="canvas.h" />
     <ClInclude Include="draw.h" />
     <ClInclude Include="Main Window.h" />
     <ClInclude Include="main.h" />

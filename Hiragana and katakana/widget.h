@@ -25,11 +25,11 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 		const double& scale{ __scale };
 
 	public:
-		virtual void OnUpdate() {}
-		virtual void OnDraw(const draw_struct& ds) {}
+		virtual bool OnUpdate() { return true; }
+		virtual void OnDraw(const draw_struct& ds) { }
 		virtual bool OnHitTest(int x, int y) { return left <= x && x < left + width && top <= y && y < top + height; }
-		virtual void OnSize(int cx, int cy) {}
-		virtual void OnClick(int x, int y) {}
+		virtual bool OnSize(int cx, int cy) { return true; }
+		virtual bool OnClick(int x, int y) { return true; }
 
 	public:
 		struct wander_struct
@@ -45,24 +45,26 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 		///<summary>
 		/// 设置 widget 的大小。
 		///</summary>
-		void resize(std::optional<int> cx, std::optional<int> cy)
+		bool resize(std::optional<int> cx, std::optional<int> cy)
 		{
 			if (cx.has_value())
 				__width = cx.value();
 			if (cy.has_value())
 				__height = cy.value();
 
-			OnSize(width, height);
+			return OnSize(width, height);
 		}
 		///<summary>
 		/// 设置 widget 的位置。坐标总是相对于其父级 widget。
 		///</summary>
-		void move(std::optional<int> x, std::optional<int> y)
+		bool move(std::optional<int> x, std::optional<int> y)
 		{
 			if (x.has_value())
 				__left = x.value();
 			if (y.has_value())
 				__top = y.value();
+
+			return true;
 		}
 	};
 }

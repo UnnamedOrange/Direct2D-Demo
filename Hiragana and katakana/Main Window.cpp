@@ -8,6 +8,7 @@
 #include "main.h"
 
 #include "rectangle.h"
+#include "canvas.h"
 
 LRESULT D2DDemo::HiraganaAndKatakana::Window::MainWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -29,7 +30,8 @@ LRESULT D2DDemo::HiraganaAndKatakana::Window::MainWindow::WndProc(HWND hwnd, UIN
 			});
 		HANDLE_MSG(hwnd, WM_LBUTTONDOWN, [this](HWND hwnd, BOOL fDoubleClick, int x, int y, UINT keyFlags)->void
 			{
-				// ui.OnClick(x, y);
+				if (ui.click(x, y))
+					draw();
 			});
 
 
@@ -68,15 +70,19 @@ void D2DDemo::HiraganaAndKatakana::Window::MainWindow::ReleaseD2DRenderTarget()
 
 void D2DDemo::HiraganaAndKatakana::Window::MainWindow::Paint(ID2D1RenderTarget* render_target)
 {
-	ui.update();
+	bool flag = false;
+	flag = ui.update();
 	ui.draw(render_target);
+	if (flag) draw();
 }
 
 D2DDemo::HiraganaAndKatakana::Window::MainWindow::MainWindow()
 {
 	property__lpWindowName__(L"Hiragana and katakana");
 
-	ui.content(new UI::Widget::rectangle{});
+	ui.content(new UI::Widget::canvas{
+		new UI::Widget::rectangle{0, 0, 50, 50},
+		new UI::Widget::rectangle{100, 100, 200, 200} });
 }
 
 int D2DDemo::HiraganaAndKatakana::Window::MainWindow::PeekMessageLoop()

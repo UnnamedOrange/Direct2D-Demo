@@ -23,6 +23,10 @@ namespace D2DDemo::HiraganaAndKatakana::Window
 		void CreateD2DRenderTarget();
 		void ReleaseD2DRenderTarget();
 
+		void draw()
+		{
+			InvalidateRect(GetHwnd(), nullptr, false);
+		}
 		void Paint(ID2D1RenderTarget* render_target);
 
 	public:

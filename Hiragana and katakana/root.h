@@ -31,7 +31,7 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 		[[nodiscard]] widget* content(widget* new_one) { auto* ret = __content.release(); __content.reset(new_one); return ret; }
 
 	public:
-		void resize(std::optional<int> cx, std::optional<int> cy)
+		bool resize(std::optional<int> cx, std::optional<int> cy)
 		{
 			if (cx.has_value())
 				__width = cx.value();
@@ -39,18 +39,21 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 				__height = cy.value();
 
 			if (content())
-				content()->resize(cx, cy);
+				return content()->resize(cx, cy);
+			return false;
 		}
-		void update()
+		bool update()
 		{
+			bool ret = false;
 			if (content())
 			{
-				content()->wander_pre([](widget* obj, const widget::wander_struct& ws)->bool
+				content()->wander_pre([&](widget* obj, const widget::wander_struct& ws)->bool
 					{
-						obj->OnUpdate();
+						ret |= obj->OnUpdate();
 						return true;
 					});
 			}
+			return ret;
 		}
 		void draw(void* obj)
 		{
@@ -63,6 +66,23 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 						return true;
 					});
 			}
+		}
+		bool click(int x, int y)
+		{
+			bool ret = false;
+			if (content())
+			{
+				content()->wander_post([&](widget* obj, const widget::wander_struct& ws)->bool
+					{
+						if (obj->OnHitTest(x - ws.relative_x, y - ws.relative_y))
+						{
+							ret |= obj->OnClick(x - ws.relative_x, y - ws.relative_y);
+							return false;
+						}
+						return true;
+					});
+			}
+			return ret;
 		}
 	};
 }
