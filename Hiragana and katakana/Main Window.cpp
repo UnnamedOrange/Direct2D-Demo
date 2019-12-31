@@ -83,6 +83,10 @@ D2DDemo::HiraganaAndKatakana::Window::MainWindow::MainWindow()
 	ui.content(new UI::Widget::canvas{
 		new UI::Widget::rectangle{0, 0, 50, 50},
 		new UI::Widget::rectangle{100, 100, 200, 200} });
+	dynamic_cast<UI::Widget::canvas*>(ui.content())->size_proc = [&](UI::Widget::canvas* obj, int cx, int cy)
+	{
+		obj->content[0]->resize(cx, std::nullopt);
+	};
 }
 
 int D2DDemo::HiraganaAndKatakana::Window::MainWindow::PeekMessageLoop()

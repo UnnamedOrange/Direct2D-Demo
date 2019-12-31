@@ -12,11 +12,11 @@ namespace D2DDemo::HiraganaAndKatakana::UI::Widget
 	class canvas : public widget
 	{
 	public:
-		std::function<void(int cx, int cy)> size_proc;
+		std::function<void(canvas* obj, int cx, int cy)> size_proc;
 
 	public:
 		virtual bool OnHitTest(int x, int y) override { return false; }
-		virtual bool OnSize(int cx, int cy) { if (size_proc) size_proc(cx, cy); return false; }
+		virtual bool OnSize(int cx, int cy) { if (size_proc) size_proc(this, cx, cy); return false; }
 
 	public:
 		std::vector<std::unique_ptr<widget>> content;
