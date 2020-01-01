@@ -4,3 +4,6 @@
 #pragma once
 
 #include "kits/TKernel.hpp"
+
+#include <dwrite.h>
+#pragma comment(lib, "dwrite.lib")

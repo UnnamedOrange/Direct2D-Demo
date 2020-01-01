@@ -31,8 +31,15 @@ void D2DDemo::HiraganaAndKatakana::Main::CreateD2DFactory()
 	if (FAILED(D2D1CreateFactory(
 		D2D1_FACTORY_TYPE::D2D1_FACTORY_TYPE_MULTI_THREADED, &pFactory)))
 		throw std::runtime_error("Fail to D2D1CreateFactory.");
+
+	if (FAILED(DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(&pDFactory))))
+		throw std::runtime_error("Fail to DWriteCreateFactory.");
 }
 D2DDemo::HiraganaAndKatakana::Main::~Main()
 {
 	if (pFactory) pFactory->Release();
+	if (pDFactory) pDFactory->Release();
 }

@@ -9,6 +9,7 @@
 
 #include "rectangle.h"
 #include "canvas.h"
+#include "text.h"
 
 LRESULT D2DDemo::HiraganaAndKatakana::Window::MainWindow::WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -21,6 +22,8 @@ LRESULT D2DDemo::HiraganaAndKatakana::Window::MainWindow::WndProc(HWND hwnd, UIN
 			});
 		HANDLE_MSG(hwnd, WM_DESTROY, [this](HWND hwnd)->void
 			{
+				ReleaseD2DRenderTarget();
+
 				PostQuitMessage(0);
 			});
 		HANDLE_MSG(hwnd, WM_SIZE, [this](HWND hwnd, UINT state, int cx, int cy)->void
@@ -81,11 +84,16 @@ D2DDemo::HiraganaAndKatakana::Window::MainWindow::MainWindow()
 	property__lpWindowName__(L"Hiragana and katakana");
 
 	ui.content(new UI::Widget::canvas{
-		new UI::Widget::rectangle{0, 0, 50, 50},
-		new UI::Widget::rectangle{100, 100, 200, 200} });
+		new UI::Widget::rectangle{0, 0, 0, 0},
+		new UI::Widget::rectangle{0, 0, 0, 0},
+		new UI::Widget::text{0, 0, 0, 0, L"平仮名と片仮名"},
+		});
 	dynamic_cast<UI::Widget::canvas*>(ui.content())->size_proc = [&](UI::Widget::canvas* obj, int cx, int cy)
 	{
-		obj->content[0]->resize(cx, std::nullopt);
+		obj->content[0]->resize(cx / 2, cy);
+		obj->content[0]->move(cx / 2, std::nullopt);
+		obj->content[1]->resize(cx / 2, cy);
+		obj->content[2]->resize(cx, cy);
 	};
 }
 

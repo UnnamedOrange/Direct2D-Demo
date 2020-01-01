@@ -15,6 +15,7 @@ namespace D2DDemo::HiraganaAndKatakana
 
 	public:
 		ID2D1Factory* pFactory{};
+		IDWriteFactory* pDFactory{};
 		void CreateD2DFactory();
 		~Main();
 	};

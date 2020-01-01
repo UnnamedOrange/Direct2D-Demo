@@ -62,5 +62,8 @@
     <ClInclude Include="canvas.h">
       <Filter>头文件\UI\Widget</Filter>
     </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>头文件\UI\Widget</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
